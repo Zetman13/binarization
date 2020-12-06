@@ -10,9 +10,9 @@ def binarize(img, window=25):
     gray_img_arr = to_grayscale(img_arr)
     #threshold_arr = get_threshold_arr(gray_img_arr, window=window, method='niblack')
     #threshold_arr = get_threshold_arr(gray_img_arr, window=window, method='sauvola', k=0.2, r=100)
-    threshold_arr = get_threshold_arr(gray_img_arr, window=window, method='cristian', k=0.1, r=100)
+    #threshold_arr = get_threshold_arr(gray_img_arr, window=window, method='cristian', k=0.1, r=100)
     #threshold_arr = get_threshold_arr(gray_img_arr, window=window, method='skew', k=0.01, r=256)
-    #threshold_arr = get_threshold_arr(gray_img_arr, window=window, method='cristian_mod', k=0.2, r=128)
+    threshold_arr = get_threshold_arr(gray_img_arr, window=window, method='cristian_mod', k=0.2, r=128)
     binary_img = (gray_img_arr > threshold_arr).astype(np.int) * 255
     result_arr = np.zeros((x, y, 3), dtype=np.uint8)
     for i in range(3):

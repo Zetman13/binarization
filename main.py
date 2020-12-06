@@ -10,7 +10,7 @@ def binarize_test(img_name, output_dir='output'):
     Path(f"{output_dir}").mkdir(parents=True, exist_ok=True)
     img = Image.open(f"input/{img_name}.jpg")
     img.load()
-    result = binarize(img, window=75)
+    result = binarize(img, window=50)
     result.save(f"{output_dir}/{img_name}.tif", compression=None)
 
 

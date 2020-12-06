@@ -6,6 +6,6 @@ def timing_val(func):
         t1 = time.time()
         res = func(*arg, **kw)
         t2 = time.time()
-        print(f"{func.__name__}: {t2 - t1}")
+        print(f"{func.__name__} ({arg[0]}): {(t2 - t1):.4f} seconds")
         return res
     return wrapper

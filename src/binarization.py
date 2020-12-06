@@ -4,15 +4,20 @@ from PIL import Image
 from numba import njit, prange
 
 
-def binarize(img, window=25):
+def binarize(img, method, window=25):
     img_arr = np.array(img, dtype=np.uint8)
     x, y, _ = img_arr.shape
     gray_img_arr = to_grayscale(img_arr)
-    #threshold_arr = get_threshold_arr(gray_img_arr, window=window, method='niblack')
-    #threshold_arr = get_threshold_arr(gray_img_arr, window=window, method='sauvola', k=0.2, r=100)
-    #threshold_arr = get_threshold_arr(gray_img_arr, window=window, method='cristian', k=0.1, r=100)
-    #threshold_arr = get_threshold_arr(gray_img_arr, window=window, method='skew', k=0.01, r=256)
-    threshold_arr = get_threshold_arr(gray_img_arr, window=window, method='cristian_mod', k=0.2, r=128)
+    if method == 'niblack':
+        threshold_arr = get_threshold_arr(gray_img_arr, window=window, method='niblack')
+    elif method == 'sauvola':
+        threshold_arr = get_threshold_arr(gray_img_arr, window=window, method='sauvola', k=0.2, r=100)
+    elif method == 'cristian':
+        threshold_arr = get_threshold_arr(gray_img_arr, window=window, method='cristian', k=0.1, r=100)
+    elif method == 'skew':
+        threshold_arr = get_threshold_arr(gray_img_arr, window=window, method='skew', k=0.01, r=256)
+    elif method == 'cristian_mod':
+        threshold_arr = get_threshold_arr(gray_img_arr, window=window, method='cristian_mod', k=0.1, r=100)
     binary_img = (gray_img_arr > threshold_arr).astype(np.int) * 255
     result_arr = np.zeros((x, y, 3), dtype=np.uint8)
     for i in range(3):

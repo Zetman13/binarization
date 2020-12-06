@@ -6,12 +6,12 @@ from src.metrics import timing_val
 
 
 @timing_val
-def binarize_test(img_name, output_dir='output'):
+def binarize_test(img_name, output_dir='output', method="cristian"):
     Path(f"{output_dir}").mkdir(parents=True, exist_ok=True)
     img = Image.open(f"input/{img_name}.jpg")
     img.load()
-    result = binarize(img, window=50)
-    result.save(f"{output_dir}/{img_name}.tif", compression=None)
+    result = binarize(img, window=50, method=method)
+    result.save(f"{output_dir}/{img_name}.tif", compression="tiff_deflate")
 
 
 if __name__ == '__main__':
@@ -33,4 +33,5 @@ if __name__ == '__main__':
         'IMG_1566',
     ]
     for img in imgs:
-        binarize_test(img)
+        binarize_test(img, method="cristian", output_dir='output_base')
+        binarize_test(img, method="cristian_mod", output_dir='output_mod')
